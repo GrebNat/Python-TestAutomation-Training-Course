@@ -12,8 +12,16 @@ assert val_1 is val_2
 """
 from collections.abc import Callable
 
+cashed_params = []
+
 
 def cache(func: Callable) -> Callable:
-    return func
-#я не понимаю, что должна делать эта функция. что и где хранить.
-#прошу подсказку
+    def func_decorator(*some):
+        if some not in list(map(lambda x: dict.get(x, "param"), cashed_params)):
+            res = func(*some)
+            cashed_params.append({"param": some, "result": res})
+            return res
+        else:
+            return dict.get(list(filter(lambda x: dict.get(x, "param") == some, cashed_params))[0], "result")
+
+    return func_decorator

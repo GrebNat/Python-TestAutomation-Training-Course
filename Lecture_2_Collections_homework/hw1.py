@@ -28,7 +28,7 @@ output lines:
 foo@example.com 729.83 EUR accountName 2021-01:0 validate_date
 bar@example.com 729.83 accountName 2021-01-02 validate_line
 """
-import re
+import re, os
 from typing import Callable, Iterable
 
 
@@ -38,7 +38,7 @@ def validate_line(line: str) -> bool:
 
 def validate_date(line: str) -> bool:
     date = line.split(" ")[-1]
-    return bool(re.match("[0-9]{4}(-[0-9]{2}){2}\n", date))
+    return re.match("[0-9]{4}(-[0-9]{2}){2}\n", date)
 
 
 def first_fail_validation(line: str, validators: Iterable[Callable]) -> str:
@@ -62,4 +62,4 @@ def check_data(file_path: str, validators: Iterable[Callable]) -> str:
         for line in res_list:
             file.write(line + "\n")
 
-    return file.name
+    return os.path.abspath(file.name)

@@ -26,13 +26,17 @@ assert = custom_range(string.ascii_lowercase, 'p', 'g', -2) == ['p', 'n', 'l', '
 """
 
 
-def custom_range(string: str, start="", stop="", step=0) -> [str]:
+def custom_range(*args) -> [str]:
     res = []
 
-# не понимаю, как должна выглядеть сигнарута. и нужно ли определять,
-# где стартовы и стоповый элемент последовательности...
+    res[:0] = args[0]
+    stop = res.index(args[1])
 
-    res[:0] = string[start:step:stop]
+    if len(args) == 2:
+        return res[:stop]
+    elif len(args) == 3:
+        return res[stop:res.index(args[2])]
+    elif len(args) == 4:
+        return res[stop:res.index(args[2]):args[3]]
 
     return res
-
