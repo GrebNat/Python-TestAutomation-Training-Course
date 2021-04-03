@@ -38,7 +38,7 @@ def validate_line(line: str) -> bool:
 
 def validate_date(line: str) -> bool:
     date = line.split(" ")[-1]
-    return bool(re.match("[0-9]{4}(-[0-9]{2}){2}\n", date))
+    return re.match("[0-9]{4}(-[0-9]{2}){2}\n", date)
 
 
 def first_fail_validation(line: str, validators: Iterable[Callable]) -> str:

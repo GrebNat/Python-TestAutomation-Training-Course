@@ -23,10 +23,10 @@ from typing import List, Tuple
 def major_and_minor_elem(inp: List) -> Tuple[int, int]:
     res, num = [], []
     for el in inp:
-        if not res.__contains__(el):
+        if el not in res:
             res.append(el)
 
-    for i in range(0, len(res)):
-        num.append(inp.count(res[i]))
+    for i, el in enumerate(res):
+        num.append(inp.count(el))
 
     return res[num.index(max(num))], res[num.index(min(num))]
