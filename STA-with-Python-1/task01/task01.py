@@ -25,11 +25,11 @@ def test_write_file():
 
 def pure_func(file_line):
     p = re.compile(
-        '([0-9]{2,3}\.[0-9]{2,3}\.[0-9]{1,3}\.[0-9]{1,3})(.-.-.)(\[[0-9\/A-Za-z:]* \+0000\]) ("[A-Z]{3,5} [a-z\/\.]*[ ]*HTTP\/1\.1") ([0-9]{3}) (.*)')
+        '(([0-9]{1,3}\.){3}[0-9]{1,3})(.-.-.)(\[[0-9\/A-Za-z:]* \+0000\]) ("[A-Z]{3,5} .*[ ]*HTTP\/1\.[0-1]") ([0-9]{3}) (.*)')
     m = p.match(file_line)
     if m is None:
         return None
-    if m.group(5) == '304':
+    if m.group(6) == '304':
         return m.group(1)
     return None
 
