@@ -63,10 +63,10 @@ if __name__ == '__main__':
     except Exception:
         print('There was an exception here')
     opp_teacher.check_homework(result_1)
-    temp_1 = opp_teacher.homework_done
+    temp_1 = opp_teacher.homework_done[oop_hw].copy()    #temp_1 = opp_teacher.homework_done
 
     advanced_python_teacher.check_homework(result_1)
-    temp_2 = Teacher.homework_done
+    temp_2 = Teacher.homework_done[oop_hw]     #temp_2 = Teacher.homework_done
     assert temp_1 == temp_2
 
     opp_teacher.check_homework(result_2)

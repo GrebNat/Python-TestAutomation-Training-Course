@@ -35,11 +35,11 @@ class HomeworkResult:
         self.homework = homework
         self.solution = solution
         self.author = author
-        self.created = homework.created
+        self.created = datetime.now()
 
 
 class Teacher(Person):
-    homework_done = defaultdict(list)
+    homework_done = defaultdict(set)
 
     @staticmethod
     def create_homework(task_test: str, days_count: int) -> Homework:
@@ -47,9 +47,7 @@ class Teacher(Person):
 
     def check_homework(self, homework_result: HomeworkResult) -> bool:
         if len(homework_result.solution) > 5:
-            if not self.homework_done.get(homework_result.homework):
-                self.homework_done.setdefault(homework_result.homework, [])
-            self.homework_done.get(homework_result.homework).append(homework_result)
+            self.homework_done[homework_result.homework].add(homework_result)
             return True
         else:
             return False
