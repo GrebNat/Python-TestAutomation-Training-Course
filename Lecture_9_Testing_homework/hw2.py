@@ -26,33 +26,17 @@ def suppressed():
 
 suppressed()
 #########################################
-
-
-class Suppress2:
-    def __init__(self, e: type):
-        self.e = e
-        pass
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, type, value, traceback):
-        if type == self.e:
-            return self
-
-
-def contextmanager(func):
-    def helper(e: type):
-        return Suppress2(func(e))
-
-    return helper
+from contextlib import contextmanager
 
 
 @contextmanager
-def s(e: type):
-    return e
+def s(e):
+    try:
+        yield
+    except:
+        print("I am in except " + str(e))
 
 
 with s(ZeroDivisionError) as err:
     1 / 0
-
+    print('qwe')
