@@ -1,0 +1,3 @@
+ip = 1.1.1.3
+mac src = 888
+mac dst = 555
